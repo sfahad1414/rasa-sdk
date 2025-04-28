@@ -67,6 +67,11 @@ dev = [
     "types-protobuf>=4.25.0.20240428"
 ]
 
+[tool.setuptools]
+# Explicitly list packages to include
+packages = ["rasa_sdk", "rasa_sdk.executor", "rasa_sdk.interfaces", "rasa_sdk.forms", "rasa_sdk.events"]
+include-package-data = true
+
 [tool.mypy]
 ignore_missing_imports = true
 show_error_codes = true
@@ -138,14 +143,3 @@ select = ["D", "E", "F", "W", "RUF"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
-
-[tool.setuptools]
-# Find all packages automatically (instead of just rasa_sdk)
-packages = "find"
-# Exclude directories that shouldn't be treated as Python packages
-package-dir = {"" = "."}
-include-package-data = true
-
-[tool.setuptools.packages.find]
-include = ["rasa_sdk*"]
-exclude = ["tests*", "*.tests", "*.tests.*", "tests.*"]
