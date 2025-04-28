@@ -17,7 +17,8 @@ license = "Apache-2.0"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
-    "Topic :: Software Development :: Libraries"
+    "Topic :: Software Development :: Libraries",
+    "License :: OSI Approved :: Apache Software License"
 ]
 keywords = [
     "nlp", "machine-learning", "machine-learning-library", "bot", "bots",
@@ -139,4 +140,12 @@ select = ["D", "E", "F", "W", "RUF"]
 convention = "google"
 
 [tool.setuptools]
-packages = ["rasa_sdk"]  # Specify the packages to include
+# Find all packages automatically (instead of just rasa_sdk)
+packages = "find"
+# Exclude directories that shouldn't be treated as Python packages
+package-dir = {"" = "."}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["rasa_sdk*"]
+exclude = ["tests*", "*.tests", "*.tests.*", "tests.*"]
