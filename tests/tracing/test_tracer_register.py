@@ -12,7 +12,8 @@ def test_tracer_register_is_singleton() -> None:
 
 def test_trace_register() -> None:
     tracer_register = ActionExecutorTracerRegister()
-    assert tracer_register.get_tracer() is None
+    assert tracer_register.tracer
+    assert tracer_register.get_tracer()
 
     tracer = trace.get_tracer(__name__)
     tracer_register.register_tracer(tracer)

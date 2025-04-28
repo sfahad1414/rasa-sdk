@@ -86,7 +86,7 @@ class TestFormValidationAction(FormValidationAction):
         # this function doesn't return anything when the slot value is incorrect
 
 
-async def test_validation_action_outside_forms():
+async def test_validation_action_outside_forms(recwarn):
     class TestSlotValidationAction(ValidationAction):
         def validate_slot2(
             self,
@@ -140,20 +140,19 @@ async def test_validation_action_outside_forms():
     }
 
     dispatcher = CollectingDispatcher()
-    with pytest.warns(None) as warnings:
-        events = await validation_action.run(
-            dispatcher=dispatcher,
-            tracker=tracker,
-            domain=domain,
-        )
+    events = await validation_action.run(
+        dispatcher=dispatcher,
+        tracker=tracker,
+        domain=domain,
+    )
 
-    assert not warnings
+    assert len(recwarn) == 0
     assert events == [
         SlotSet("slot2", "validated_value"),
     ]
 
 
-async def test_validation_action_outside_forms_with_form_active_loop():
+async def test_validation_action_outside_forms_with_form_active_loop(recwarn):
     class TestSlotValidationAction(ValidationAction):
         def validate_slot1(
             self,
@@ -211,18 +210,17 @@ async def test_validation_action_outside_forms_with_form_active_loop():
     }
 
     dispatcher = CollectingDispatcher()
-    with pytest.warns(None) as warnings:
-        events = await validation_action.run(
-            dispatcher=dispatcher,
-            tracker=tracker,
-            domain=domain,
-        )
+    events = await validation_action.run(
+        dispatcher=dispatcher,
+        tracker=tracker,
+        domain=domain,
+    )
 
-    assert not warnings
+    assert len(recwarn) == 0
     assert events == []  # validation didn't run for this slot
 
 
-async def test_form_validation_action_doesnt_work_for_global_slots():
+async def test_form_validation_action_doesnt_work_for_global_slots(recwarn):
     class TestSlotValidationAction(FormValidationAction):
         def name(self):
             return "validate_form1"
@@ -276,20 +274,19 @@ async def test_form_validation_action_doesnt_work_for_global_slots():
     }
 
     dispatcher = CollectingDispatcher()
-    with pytest.warns(None) as warnings:
-        events = await validation_action.run(
-            dispatcher=dispatcher,
-            tracker=tracker,
-            domain=domain,
-        )
+    events = await validation_action.run(
+        dispatcher=dispatcher,
+        tracker=tracker,
+        domain=domain,
+    )
 
-    assert not warnings
+    assert len(recwarn) == 0
     # validation shoudn't run because `TestSlotValidationAction` implements
     # `FormValidationAction` and `slot1` is not assigned to any form
     assert events == []
 
 
-async def test_form_validation_action():
+async def test_form_validation_action(recwarn):
     form_name = "test_form_validation_action"
     form = TestFormValidationAction(form_name)
 
@@ -320,14 +317,13 @@ async def test_form_validation_action():
     }
 
     dispatcher = CollectingDispatcher()
-    with pytest.warns(None) as warnings:
-        events = await form.run(
-            dispatcher=dispatcher,
-            tracker=tracker,
-            domain=domain,
-        )
+    events = await form.run(
+        dispatcher=dispatcher,
+        tracker=tracker,
+        domain=domain,
+    )
 
-    assert not warnings
+    assert len(recwarn) == 0
     assert events == [
         SlotSet("slot1", "validated_value"),
         SlotSet("slot2", None),
