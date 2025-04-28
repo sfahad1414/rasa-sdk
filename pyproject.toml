@@ -137,3 +137,6 @@ select = ["D", "E", "F", "W", "RUF"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.setuptools]
+packages = ["rasa_sdk"]  # Specify the packages to include
