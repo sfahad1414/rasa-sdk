@@ -17,8 +17,7 @@ license = "Apache-2.0"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
-    "Topic :: Software Development :: Libraries",
-    "License :: OSI Approved :: Apache Software License"
+    "Topic :: Software Development :: Libraries"
 ]
 keywords = [
     "nlp", "machine-learning", "machine-learning-library", "bot", "bots",
@@ -67,9 +66,16 @@ dev = [
     "types-protobuf>=4.25.0.20240428"
 ]
 
+[tool.uv]
+package = true
+required-environments = [
+    "sys_platform == 'darwin' and platform_machine == 'arm64'",
+    "sys_platform == 'darwin' and platform_machine == 'x86_64'",
+]
+
 [tool.setuptools]
 # Explicitly list packages to include
-packages = ["rasa_sdk", "rasa_sdk.executor", "rasa_sdk.interfaces", "rasa_sdk.forms", "rasa_sdk.events"]
+packages = ["rasa_sdk"]
 include-package-data = true
 
 [tool.mypy]
