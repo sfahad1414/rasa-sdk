@@ -74,7 +74,6 @@ required-environments = [
 ]
 
 [tool.setuptools]
-where = ["."]
 include = ["rasa_sdk*"]
 include-package-data = true
 
