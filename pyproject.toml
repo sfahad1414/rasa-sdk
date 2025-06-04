@@ -74,7 +74,7 @@ required-environments = [
 ]
 
 [tool.setuptools]
-include = ["rasa_sdk", "rasa_sdk.cli", "rasa_sdk.grpc_py", "rasa_sdk.knowledge_base"]
+packages = ["rasa_sdk", "rasa_sdk.cli", "rasa_sdk.grpc_py", "rasa_sdk.knowledge_base"]
 include-package-data = true
 
 [tool.mypy]
