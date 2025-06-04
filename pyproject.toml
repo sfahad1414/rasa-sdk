@@ -73,9 +73,8 @@ required-environments = [
     "sys_platform == 'darwin' and platform_machine == 'x86_64'",
 ]
 
-[tool.setuptools]
-packages = ["rasa_sdk", "rasa_sdk.cli", "rasa_sdk.grpc_py", "rasa_sdk.knowledge_base"]
-include-package-data = true
+[tool.setuptools.packages.find]
+include = ["rasa_sdk*"]
 
 [tool.mypy]
 ignore_missing_imports = true
