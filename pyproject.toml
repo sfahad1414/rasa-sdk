@@ -74,9 +74,8 @@ required-environments = [
 ]
 
 [tool.setuptools]
-packages = [
-    "rasa_sdk",
-]
+where = ["."]
+include = ["rasa_sdk*"]
 include-package-data = true
 
 [tool.mypy]
