@@ -37,10 +37,10 @@ jobs:
       - name: Checkout git repository 🕝
         uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
 
-      - name: Set up Python 3.10 🐍
+      - name: Set up Python 3.12 🐍
         uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435
         with:
-          python-version: '3.10'
+          python-version: '3.12'
 
       - name: Read Poetry Version 🔢
         run: |
@@ -56,7 +56,7 @@ jobs:
         uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57
         with:
           path: ~/.cache/pypoetry/virtualenvs
-          key: ${{ runner.os }}-poetry-3.10-${{ hashFiles('**/poetry.lock') }}
+          key: ${{ runner.os }}-poetry-3.12-${{ hashFiles('**/poetry.lock') }}
           restore-keys: ${{ runner.os }}-poetry-
 
       - name: Checkout target branch to be able to diff
@@ -90,7 +90,7 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        python-version: [3.9, '3.10', '3.11', '3.12']
+        python-version: ['3.12']
 
     steps:
       - name: Checkout git repository 🕝
@@ -125,7 +125,7 @@ jobs:
         run: make test
 
       - name: Send Coverage Report 📊
-        if: matrix.python-version == '3.10'
+        if: matrix.python-version == '3.12'
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_SERVICE_NAME: github

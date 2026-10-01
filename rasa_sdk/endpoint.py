@@ -256,7 +256,6 @@ def run(
         port=port,
         ssl=ssl_context,
         workers=utils.number_of_sanic_workers(),
-        legacy=True,
     )
 
 

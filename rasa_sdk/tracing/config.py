@@ -6,6 +6,7 @@ import os
 from typing import Any, Dict, Optional, Text
 
 import grpc
+import rasa_sdk.tracing.jaeger_compat  # noqa: F401
 from opentelemetry.exporter.jaeger.thrift import JaegerExporter
 from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 from opentelemetry.sdk.resources import SERVICE_NAME, Resource

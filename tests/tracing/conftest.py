@@ -7,6 +7,7 @@ import grpc
 import opentelemetry.proto.collector.trace.v1.trace_service_pb2_grpc as trace_service
 import pytest
 from google.protobuf.internal.containers import RepeatedCompositeFieldContainer
+import rasa_sdk.tracing.jaeger_compat  # noqa: F401
 from opentelemetry.exporter.jaeger.thrift.gen.agent.Agent import emitBatch_args
 from opentelemetry.exporter.jaeger.thrift.gen.jaeger.ttypes import Batch
 from opentelemetry.proto.collector.trace.v1.trace_service_pb2 import (

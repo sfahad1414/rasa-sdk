@@ -4,7 +4,7 @@ import inspect
 import logging
 import pkgutil
 import warnings
-from typing import Text, List, Dict, Any, Type, Union, Callable, Optional, Set, cast
+from typing import Text, List, Dict, Any, Type, Union, Callable, Optional, Set
 from collections import namedtuple
 import types
 import sys
@@ -196,7 +196,6 @@ class ActionExecutor:
             `Action` subclass class or an actual `Action` subclass.
         """
         if inspect.isclass(action):
-            action = cast(Type[Action], action)
             if action.__module__.startswith("rasa."):
                 logger.warning(f"Skipping built in Action {action}.")
                 return
