@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -31,16 +31,16 @@ dependencies = [
     "typing-extensions==4.16.0",
     "Sanic-Cors==2.2.0",
     "ruamel.yaml==0.19.1",
-    "websockets==17.1",
+    "websockets==17.2",
     "pluggy==1.6.0",
-    "opentelemetry-api==1.45.0",
-    "opentelemetry-sdk==1.45.0",
+    "opentelemetry-api==1.45.1",
+    "opentelemetry-sdk==1.45.1",
     "opentelemetry-exporter-jaeger-thrift==1.21.0",
-    "deprecated==1.3.1",
-    "opentelemetry-exporter-otlp==1.45.0",
+    "deprecated==3.0.0",
+    "opentelemetry-exporter-otlp==1.45.1",
     "grpcio==1.84.0",
     "protobuf==7.36.2",
-    "pydantic==2.13.5",
+    "pydantic==2.14.1",
     "grpcio-health-checking==1.84.0",
     "grpcio-tools==1.84.0"
 ]
@@ -60,9 +60,9 @@ dev = [
     "toml>=0.10.2",
     "pep440-version-utils>=1.2.0",
     "semantic_version>=2.10.0",
-    "mypy>=2.3.1",
+    "mypy>=2.4.0",
     "sanic-testing>=24.6.0",
-    "ruff>=0.16.9",
+    "ruff>=0.17.0",
     "pytest-asyncio>=1.4.0",
     "types-protobuf>=7.35.1.20260906"
 ]
@@ -75,7 +75,9 @@ required-environments = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["rasa_sdk*"]
+where = ["."]
+include = ["rasa_sdk", "rasa_sdk.*"]
+namespaces = true
 
 [tool.mypy]
 ignore_missing_imports = true
